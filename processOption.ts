@@ -1,5 +1,6 @@
 import { AddToTask } from "./add_to_tasks"
 import { ListTask } from "./list_tasks"
+import { TaskActions } from "./task"
 import { TaskInterface } from "./task/task.interface"
 
 const listTask = new ListTask()
@@ -87,7 +88,13 @@ function listUncompletedTask() {
 }
 
 function markTaskAsCompleted(id: string) {
-	console.log("INNN")
-	const task = listTask.GetAllTasks().find(task => task.id == +id)
-	console.log(task)
+	const allTask = listTask.GetAllTasks()
+	let newTasks: TaskInterface[] = allTask.map(task => {
+		if (task.id == +id) {
+			return { ...task, completed: true }
+		}
+		return task
+	})
+
+	new TaskActions().WriteTasks(newTasks)
 }

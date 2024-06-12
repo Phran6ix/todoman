@@ -42,5 +42,9 @@ export class TaskActions {
 		writeFileSync(this.path, JSON.stringify(parsedData), "utf8")
 		return
 	}
+
+	WriteTasks(tasks: TaskInterface[]) {
+		return writeFileSync(this.path, JSON.stringify(tasks), "utf8")
+	}
 }
 
