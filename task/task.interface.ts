@@ -4,7 +4,8 @@ export interface TaskInterface {
 	title: string
 	comment?: string
 	completed: boolean
-	dateAdded: Date
+	dateAdded: string
+	schedule?: Date
 }
 
 export interface GetATaskFilter {

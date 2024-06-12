@@ -5,7 +5,8 @@ export class ListTask {
 	constructor() {
 		this.tasks = new TaskActions()
 	}
-	async GetAllTasks() {
+
+	GetAllTasks() {
 		return this.tasks.GetAllTask()
 	}
 }

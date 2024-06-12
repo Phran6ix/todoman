@@ -1,41 +1,22 @@
 #!/usr/bin/env ts-node
 
 import { Command } from "commander"
-import { ListTask } from "./list_tasks/"
-import { TaskInterface } from "./task/task.interface"
-import { AddToTask } from "./add_to_tasks/add_to_task"
+import { processOptions } from "./processOption"
 const program = new Command()
 
 program
-	.option("-a, --add <type...>", "add a new task to list")
-	.option("-ls, --list_all", "display all current tasks")
-	.option("-l, --list", "display all uncompleted tasks")
 	.version("0.0.1")
+	.description("A cli-based task manager ")
+	.option("-a, --add <value...>", "add a new task to list")
+	.option("-ls, --list_all", "display all current tasks")
+	.option("-l, --list", "display all uncompleted tasks for the day")
+	.option("-lc, --list_uncompleted", "display all uncompleted tasks")
+	.option("-c, --completed_task <value>", "mark a task as complete")
 
 program.parse(process.argv)
 let option = program.opts()
-
-const processOptions = function(args: any) {
-
-	if (args.add) {
-		if (args.add.length > 2) {
-			console.log("Can only take 2 argument, title and comment")
-			return
-		}
-
-		const taskObject: Omit<TaskInterface, "id"> = {
-			title: args.add[0],
-			comment: args.add[1],
-			dateAdded: new Date(),
-			completed: false
-		}
-		new AddToTask().AddToTask(taskObject)
-
-	}
-	if (args.list_all) {
-		const listTask = new ListTask()
-		console.log(listTask.GetAllTasks())
-	}
+console.log("Option", option)
+if (!process.argv[2]) {
+	program.outputHelp()
 }
-
 processOptions(option)

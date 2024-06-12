@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "fs"
 import { GetATaskFilter, TaskInterface } from "./task.interface"
 import path from "path"
-console.log(__dirname)
+
 export class TaskActions {
 	private path: string
 	constructor() {
@@ -31,10 +31,9 @@ export class TaskActions {
 
 	AddToTask(task: Omit<TaskInterface, "id">) {
 		const data = readFileSync(this.path, "utf8")
-		console.log(data)
 
 		const parsedData = JSON.parse(data)
-		console.log("PARSEDDATA", parsedData)
+
 		parsedData.push({
 			...task,
 			id: parsedData.length + 1,
@@ -45,4 +44,3 @@ export class TaskActions {
 	}
 }
 
-console.log("TTT", TaskActions)
