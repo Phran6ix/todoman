@@ -7,7 +7,6 @@ const listTask = new ListTask()
 export const processOptions = function(args: any) {
 	switch (Object.keys(args)[0]) {
 		case "add":
-			console.log(args)
 			processAdd(args.add)
 			break;
 		case "list_all":
@@ -20,7 +19,6 @@ export const processOptions = function(args: any) {
 			listUncompletedTask()
 			break;
 		case "completed_task":
-			console.log("wwF", args)
 			markTaskAsCompleted(args.completed_task)
 			break;
 		default:
@@ -54,11 +52,9 @@ function processAdd(args: string[]) {
 		const taskObject: Omit<TaskInterface, "id"> = {
 			title,
 			comment,
-			dateAdded: `${new Date().getDay()}-${new Date().getMonth()}-${new Date().getFullYear()}`
-			,
+			dateAdded: `${new Date().getDay()}-${new Date().getMonth()}-${new Date().getFullYear()}`,
 			completed: false
 		}
-		console.log(taskObject)
 		new AddToTask().AddToTask(taskObject)
 	})
 }
