@@ -15,7 +15,7 @@ program
 
 program.parse(process.argv)
 let option = program.opts()
-console.log("Option", option)
+
 if (!process.argv[2]) {
 	program.outputHelp()
 }
