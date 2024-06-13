@@ -7,7 +7,8 @@ const listTask = new ListTask()
 export const processOptions = function(args: any) {
 	switch (Object.keys(args)[0]) {
 		case "add":
-			processAdd(args)
+			console.log(args)
+			processAdd(args.add)
 			break;
 		case "list_all":
 			processListAll()
@@ -40,20 +41,26 @@ function processListAll() {
 	console.log(tasks)
 }
 
-function processAdd(args: any) {
-	if (args.add.length > 2) {
-		console.log("Can only take 2 argument, title and comment")
-		return
-	}
-
-	const taskObject: Omit<TaskInterface, "id"> = {
-		title: args.add[0],
-		comment: args.add[1],
-		dateAdded: `${new Date().getDay()}-${new Date().getMonth()}-${new Date().getFullYear()}`
-		,
-		completed: false
-	}
-	new AddToTask().AddToTask(taskObject)
+function processAdd(args: string[]) {
+	let fetchTitleAndComment = args.map((arg: string) => {
+		const argSplit = arg.split("-")
+		return {
+			title: argSplit[0],
+			comment: argSplit[1]
+		}
+	})
+	fetchTitleAndComment.forEach((arg) => {
+		let { title, comment } = arg
+		const taskObject: Omit<TaskInterface, "id"> = {
+			title,
+			comment,
+			dateAdded: `${new Date().getDay()}-${new Date().getMonth()}-${new Date().getFullYear()}`
+			,
+			completed: false
+		}
+		console.log(taskObject)
+		new AddToTask().AddToTask(taskObject)
+	})
 }
 
 
