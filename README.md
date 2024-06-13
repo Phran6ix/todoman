@@ -7,6 +7,10 @@ Todoman requires [Node.js](https://nodejs.org/) v18+ to run.
 ```
 git clone git@github.com:Phran6ix/todoman.git
 ```
+install dependencies
+```
+npm install
+```
 
 and run the command to install the application locally on your maching
 
